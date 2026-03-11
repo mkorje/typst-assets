@@ -30,12 +30,17 @@ macro_rules! re {
 }
 
 mod html;
+mod mathml;
 
 fn main() {
     match std::env::args().nth(1).as_deref() {
         Some("html") => html::main(),
+        Some("mathml") => mathml::main(),
         Some(job) => panic!("unknown codegen job: {job}"),
-        None => panic!("no codegen job provided"),
+        None => {
+            html::main();
+            mathml::main()
+        }
     }
 }
 
